@@ -1,10 +1,10 @@
 // ******** VUE ********
-const { createApp } = Vue;
-createApp({
-    data() {
-        return {
+// const { createApp } = Vue;
+// createApp({
+//     data() {
+//         return {
             
-        }
-    }
-}).mount("#app");
+//         }
+//     }
+// }).mount("#app");
 // ******** VUE ********
