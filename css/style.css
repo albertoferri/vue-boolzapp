@@ -34,13 +34,17 @@ header{
     background-color: white;
 }
 
-.user-info{
+.user-info, .main-chat-info{
     display: flex;
     align-items: center;
     justify-content: space-between;
     background-color: #eaeaea;
     padding: 10px;
     border-right: 1px solid grey;
+}
+
+.main-chat-info{
+    width: 100%;
 }
 
 .user-log span{
@@ -67,6 +71,9 @@ header{
     width: 700px;
     height: 600px;
     background-image: url(/img/mine.jpg);
+
+    display: flex;
+    flex-direction: column;
 }
 
 .alert{
@@ -101,7 +108,7 @@ header{
 
 .search-bar input{
     width: 90%;
-    padding: 0 10px;
+    padding: 5px 10px;
 }
 
 .chat-container{
@@ -124,4 +131,60 @@ header{
 .chat-info span:first-child{
     font-size: 22px;
     font-weight: bold;
+}
+
+.chat-info span:last-child{
+    opacity: .5;
+}
+
+.chat-box{
+    display: flex;
+
+    height: 480px;
+}
+
+.chat-answer, .chat-sent{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    border: 1px solid black;
+    width: 350px;
+
+    padding: 20px 25px;
+}
+
+.chat-sent{
+    padding-top: 70px;
+}
+
+.write-bar{
+    display: flex;
+}
+
+.write-bar .fa-face-smile, .fa-paper-plane{
+    padding: 10px;
+    color: white;
+    background-color: grey;
+    font-size: 20px;
+    vertical-align: middle;
+    width: 53px;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.write-bar input{
+    width: 100%;
+    padding: 17px 0;
+}
+
+.message{
+    display: flex;
+    justify-content: flex-start;
+    background-color: #d5f9ba;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.message.received{
+    background-color: white;
 }
