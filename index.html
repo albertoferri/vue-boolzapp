@@ -47,6 +47,7 @@
                     <div v-for="(contact, index) in contacts" :key="index" class="contact" role="button" @click="openChat(index)">
                         <img :src="contact.avatar" alt="">
                         <span>{{ contact.name }}</span>
+                        <span>{{ contact.messages.message }}</span>
                     </div>
                     
                 </div>
@@ -54,7 +55,7 @@
             <div class="main-container">
                 <div class="main-chat-info">
                     <div class="user-log">
-                        <img src="img/avatar_1.jpg" alt="foto utente">
+                        <img src="./img/avatar_2.jpg" alt="">
                         <span> {{ contacts.name }} </span>
                     </div>
                     <div class="user-icon">

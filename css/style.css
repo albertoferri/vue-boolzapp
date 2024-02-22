@@ -81,6 +81,10 @@ body{
     color: #8edafc;
 }
 
+.fa-solid{
+    cursor: pointer;
+}
+
 .alertmessage span:last-child{
     text-decoration: underline;
     opacity: .5;
