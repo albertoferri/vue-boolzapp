@@ -41,16 +41,22 @@
                     </div>
                 </div>
                 <div class="search-bar d-flex justify-content-center py-1">
-                    <input class="w-100 mx-2" type="text" placeholder="Cerca...">
+                    <input v-model="searchTerm" class="w-100 mx-2" type="text" placeholder="Cerca...">
                 </div>
                 <div class="chat-container d-flex flex-column gap-2">
-                    <div v-for="(contact, index) in contacts" :key="index" class="contact" role="button" @click="openChat(index)">
+                    <div 
+                        v-for="(contact, index) in filteredContacts" 
+                        :key="index" 
+                        class="contact" 
+                        role="button" 
+                        @click="openChat(index)"
+                    >
                         <img :src="contact.avatar" alt="">
                         <div class="contact-info">
                             <span>{{ contact.name }}</span><br>
                             <span class="last-message">{{ contact.messages[contact.messages.length - 1].message }}</span>
                         </div>
-                        <div class="last-message-time">12:00</div>
+                        <div class="last-message-time"><small>12:00</small></div>
                     </div>
                 </div>
             </div>

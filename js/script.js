@@ -3,6 +3,7 @@ const { createApp } = Vue;
 createApp({
     data() {
         return {
+            searchTerm: '',
             newMessage: '',
             currentChat: 0,
             contacts: [
@@ -195,8 +196,14 @@ createApp({
                 });
               }, 1000);
             }
+        },  
+    },
+    computed: {
+        filteredContacts() {
+          return this.contacts.filter(contact => 
+            contact.name.toLowerCase().includes(this.searchTerm.toLowerCase())
+          );
         },
-          
     },
 }).mount("#app");
 // ******** VUE ********s
