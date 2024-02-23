@@ -15,7 +15,6 @@ body{
     width: 1100px;
     height: 650px;
     margin-top: 100px;
-
 }
 
 .sidebar{
@@ -30,9 +29,6 @@ body{
     background-color: #eaeaea;
     padding: 10px;
     height: 70px;
-}
-
-.main-chat-info{
     width: 100%;
 }
 
@@ -136,6 +132,7 @@ body{
 
     display: flex;
     flex-direction: column;
+    position: relative;
 }
 
 .message small{
@@ -187,4 +184,11 @@ body{
     border: transparent;
     border-radius: 6px;
     height: 40px;
+}
+
+
+.dropdown{
+    position: absolute;
+    top: 0;
+    right: 5px;
 }

@@ -3,9 +3,11 @@ const { createApp } = Vue;
 createApp({
     data() {
         return {
+            // VARIABILI
             searchTerm: '',
             newMessage: '',
             currentChat: 0,
+            
             contacts: [
                 {
                     name: 'Michele',
@@ -172,9 +174,13 @@ createApp({
         }
     }, 
     methods: {
+        // MILESTONE 2
+        // funzione per far apparire la chat al click
         openChat(index) {
             this.currentChat = index;
         },
+        // MILESTONE 3
+        // funzione per pushare un messaggio dentro l'array
         sendMessage() {
             if (this.newMessage.trim() !== '') {
               const date = new Date();
@@ -186,6 +192,7 @@ createApp({
               });
               this.newMessage = '';
         
+            //   far apparire il messaggio di risposta 1s dopo
               setTimeout(() => {
                 const replyDate = new Date();
                 const formattedReplyDate = replyDate.toLocaleTimeString();
@@ -196,8 +203,20 @@ createApp({
                 });
               }, 1000);
             }
-        },  
+        },
+        // bonus
+        deleteMessage(index) {
+            this.contacts[this.currentChat].messages.splice(index, 1);
+            this.selectedMessageIndex = null;
+        },
+        showMenu(index) {
+            this.selectedMessageIndex = index;
+          },
+          hideMenu() {
+            this.selectedMessageIndex = null;
+        },
     },
+    // funzione per filtrare le chat
     computed: {
         filteredContacts() {
           return this.contacts.filter(contact => 

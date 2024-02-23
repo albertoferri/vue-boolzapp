@@ -75,14 +75,22 @@
                 </div>
                 <div class="chat-box d-flex flex-column overflow-y-auto" v-if="currentChat !== null">
                     <div 
-                        v-for="message in contacts[currentChat].messages" 
-                        :key="message.date" 
-                        :class="`message ${message.status}`"
+                      v-for="(message, index) in contacts[currentChat].messages" 
+                      :key="message.date" 
+                      :class="`message ${message.status}`"
                     >
-                        <p class="mb-0">{{ message.message }}</p>
-                        <small style="font-size: 12px;">{{ message.date }}</small>
+                      <p class="mb-0">{{ message.message }}</p>
+                      <small style="font-size: 12px;">{{ message.date }}</small>
+                      <div class="dropdown">
+                        <span class="dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                        </span>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                          <li><a class="dropdown-item" href="#" @click.prevent="deleteMessage(index)">Cancella</a></li>
+                        </ul>
+                      </div>
                     </div>
                 </div>
+                  
                 <div id="message-bar" class="w-100 d-flex align-items-center ">
                     <button>
                         <i class="fa-regular fa-face-smile"></i>
