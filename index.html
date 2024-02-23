@@ -46,17 +46,21 @@
                 <div class="chat-container d-flex flex-column gap-2">
                     <div v-for="(contact, index) in contacts" :key="index" class="contact" role="button" @click="openChat(index)">
                         <img :src="contact.avatar" alt="">
-                        <span>{{ contact.name }}</span>
-                        <span>{{ contact.messages.message }}</span>
+                        <div class="contact-info">
+                            <span>{{ contact.name }}</span><br>
+                            <span class="last-message">{{ contact.messages[contact.messages.length - 1].message }}</span>
+                        </div>
+                        <div class="last-message-time">12:00</div>
                     </div>
-                    
                 </div>
             </div>
             <div class="main-container">
                 <div class="main-chat-info">
-                    <div class="user-log">
-                        <img src="./img/avatar_2.jpg" alt="">
-                        <span> {{ contacts.name }} </span>
+                    <div>
+                        <img class="user-pic" :src="contacts.avatar" alt="immagine Michele">
+                        <div class="user-name">{{ contacts.name }}</div>
+                        <div class="last-message d-inline "><small>Ultimo accesso alle</small></div>
+                        <span class="last-access"><small>12:00</small></span>
                     </div>
                     <div class="user-icon">
                         <i class="fa-solid fa-magnifying-glass"></i>
@@ -74,11 +78,17 @@
                         <small style="font-size: 12px;">{{ message.date }}</small>
                     </div>
                 </div>
-                <div class="write-bar">
-                    <i class="fa-solid fa-face-smile"></i>
-                    <input type="text" placeholder="scrivi qui un messaggio">
-                    <i class="fa-solid fa-paper-plane"></i>
-                </div>
+                <div id="message-bar" class="w-100 d-flex">
+                    <button>
+                        <i class="fa-regular fa-face-smile"></i>
+                    </button>
+
+                    <input type="text" placeholder="Scrivi messaggio">
+
+                    <button>
+                        <i class="fa-solid fa-microphone"></i>
+                    </button>
+                </div>  
                 
 
             </div>
