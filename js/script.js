@@ -3,6 +3,7 @@ const { createApp } = Vue;
 createApp({
     data() {
         return {
+            newMessage: '',
             currentChat: 0,
             contacts: [
                 {
@@ -173,6 +174,19 @@ createApp({
         openChat(index) {
             this.currentChat = index;
         },
+        sendMessage() {
+            if (this.newMessage.trim() !== '') {
+              const date = new Date();
+              const formattedDate = date.toLocaleString();
+              this.contacts[this.currentChat].messages.push({
+                date: formattedDate,
+                message: this.newMessage,
+                status: 'sent',
+              });
+              this.newMessage = '';
+            }
+        },
+          
     },
 }).mount("#app");
 // ******** VUE ********s

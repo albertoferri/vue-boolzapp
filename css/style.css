@@ -29,6 +29,7 @@ body{
     justify-content: space-between;
     background-color: #eaeaea;
     padding: 10px;
+    height: 70px;
 }
 
 .main-chat-info{
@@ -62,7 +63,6 @@ body{
 
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
 }
 
 .alert{
@@ -109,6 +109,11 @@ body{
     vertical-align: middle;
 }
 
+.user-pic{
+    width: 50px;
+    height: auto;
+}
+
 .chat-info span:first-child{
     font-size: 22px;
     font-weight: bold;
@@ -119,29 +124,8 @@ body{
 }
 
 .chat-box{
-    height: 475px;
+    height: 530px;
     padding: 20px;
-}
-
-.write-bar{
-    display: flex;
-    height: 55px;
-}
-
-.write-bar .fa-face-smile, .fa-paper-plane{
-    padding: 10px;
-    color: white;
-    background-color: grey;
-    font-size: 20px;
-    vertical-align: middle;
-    width: 53px;
-    text-align: center;
-    vertical-align: middle;
-}
-
-.write-bar input{
-    width: 100%;
-    padding: 17px 0;
 }
 
 .message {
@@ -180,6 +164,7 @@ body{
 
 #message-bar{
     background-color: #f3eeea;
+    height: 50px;
 }
 
 #message-bar > * {

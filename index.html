@@ -40,8 +40,8 @@
                         <span>Attiva le notifiche desktop</span>
                     </div>
                 </div>
-                <div class="search-bar d-flex justify-content-center ">
-                    <input type="text" placeholder="Cerca...">
+                <div class="search-bar d-flex justify-content-center py-1">
+                    <input class="w-100 mx-2" type="text" placeholder="Cerca...">
                 </div>
                 <div class="chat-container d-flex flex-column gap-2">
                     <div v-for="(contact, index) in contacts" :key="index" class="contact" role="button" @click="openChat(index)">
@@ -56,11 +56,10 @@
             </div>
             <div class="main-container">
                 <div class="main-chat-info">
-                    <div>
-                        <img class="user-pic" :src="contacts.avatar" alt="immagine Michele">
-                        <div class="user-name">{{ contacts.name }}</div>
-                        <div class="last-message d-inline "><small>Ultimo accesso alle</small></div>
-                        <span class="last-access"><small>12:00</small></span>
+                    <div class="d-flex gap-2">
+                        <img  class="user-pic align-middle rounded-5 " :src="contacts[currentChat].avatar"   alt="immagine ">
+                        <span class="user-name">{{ contacts[currentChat].name }}<br><small>utlimo accesso alle 12:00</small></span>
+                        
                     </div>
                     <div class="user-icon">
                         <i class="fa-solid fa-magnifying-glass"></i>
@@ -68,7 +67,7 @@
                         <i class="fa-solid fa-ellipsis-vertical"></i>
                     </div>
                 </div>
-                <div class="chat-box d-flex flex-column" v-if="currentChat !== null">
+                <div class="chat-box d-flex flex-column overflow-y-auto" v-if="currentChat !== null">
                     <div 
                         v-for="message in contacts[currentChat].messages" 
                         :key="message.date" 
@@ -83,7 +82,7 @@
                         <i class="fa-regular fa-face-smile"></i>
                     </button>
 
-                    <input type="text" placeholder="Scrivi messaggio">
+                    <input type="text" v-model="newMessage" @keyup.enter="sendMessage" placeholder="Scrivi messaggio" >
 
                     <button>
                         <i class="fa-solid fa-microphone"></i>
