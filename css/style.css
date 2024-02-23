@@ -167,10 +167,6 @@ body{
     height: 50px;
 }
 
-#message-bar > * {
-    height: 100%;
-}
-
 #message-bar button {
     background-color: transparent;
     border: transparent;
@@ -190,5 +186,5 @@ body{
 
     border: transparent;
     border-radius: 6px;
-
+    height: 40px;
 }

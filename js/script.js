@@ -177,13 +177,23 @@ createApp({
         sendMessage() {
             if (this.newMessage.trim() !== '') {
               const date = new Date();
-              const formattedDate = date.toLocaleString();
+              const formattedDate = date.toLocaleTimeString();
               this.contacts[this.currentChat].messages.push({
                 date: formattedDate,
                 message: this.newMessage,
                 status: 'sent',
               });
               this.newMessage = '';
+        
+              setTimeout(() => {
+                const replyDate = new Date();
+                const formattedReplyDate = replyDate.toLocaleTimeString();
+                this.contacts[this.currentChat].messages.push({
+                  date: formattedReplyDate,
+                  message: 'basta scrivermi!!',
+                  status: 'received',
+                });
+              }, 1000);
             }
         },
           
