@@ -235,17 +235,19 @@ createApp({
         // ho usato la stessa funzione per mandare i messaggi ma legata alla pressione del tasto del microfono
         sendVoiceMessage() {
             if (this.isRecording) {
-              const date = new Date();
-              const formattedDate = date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-              this.contacts[this.currentChat].messages.push({
-                date: formattedDate,
-                message: ' ▁ ▂ ▄ ▂ ▅ ▂ ▅ ▄ ▂ ▁ ▄ ▅ ▇ ', 
-                status: 'sent',
-              });
-              this.sendMessage();
-              this.isRecording = false;
+                const date = new Date();
+                
+                this.contacts[this.currentChat].messages.push({
+                    date: date,
+                    message: ' ▁ ▂ ▄ ▂ ▅ ▂ ▅ ▄ ▂ ▁ ▄ ▅ ▇ ',
+                    status: 'sent',
+                });
+        
+                this.sendMessage();
+                this.isRecording = false;
             }
         },
+        
     },
     // funzione per filtrare le chat
     // ho usato una proprietà calcolata così che venga riaggiornata solo quando cambia
