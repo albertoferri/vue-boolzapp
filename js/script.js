@@ -197,20 +197,26 @@ createApp({
               });
               this.newMessage = '';
         
-            //   la funzione setTimeOut viene lasciata dentro per evitare che arrivi una risposta anche se è stato premuto il tasto invio
-            //   essendoci la proprietà .trim evito che venga inserito testo vuoto, pertanto se ho inviato un campo vuoto --> non manda la risposta
+             // la funzione setTimeOut viene lasciata dentro per evitare che arrivi una risposta anche se è stato premuto il tasto invio
+             // essendoci la proprietà .trim evito che venga inserito testo vuoto, pertanto se ho inviato un campo vuoto --> non manda la risposta
 
-                // far apparire il messaggio di risposta 1s dopo
-              setTimeout(() => {
-                const replyDate = new Date();
-                // 2-digit formatta l'ora con due cifre
-                const formattedReplyDate = replyDate.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-                this.contacts[this.currentChat].messages.push({
-                  date: formattedReplyDate,
-                  message: 'ok',
-                  status: 'received',
-                });
-              }, 1000);
+             // far apparire il messaggio di risposta 1s dopo
+             // 2-digit formatta l'ora con due cifre
+             setTimeout(() => {
+              const replyDate = new Date();
+              const formattedReplyDate = replyDate.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+              // Se il messaggio inviato è un messaggio vocale, cambia il messaggio di risposta
+              if (this.isRecording) {
+                replyMessage = 'ciao';
+              } else{
+                replyMessage = 'ok'
+              }
+              this.contacts[this.currentChat].messages.push({
+                date: formattedReplyDate,
+                message: replyMessage,
+                status: 'received',
+              });
+             }, 1000);
             }
         },
         // bonus
@@ -229,9 +235,10 @@ createApp({
               const formattedDate = date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
               this.contacts[this.currentChat].messages.push({
                 date: formattedDate,
-                message: ' ▁ ▂ ▄ ▂ ▅ ▂ ▅ ▄ ▂ ▁ ▄ ▅ ▇ ', // Simula un messaggio vocale con linee di altezza diversa
+                message: ' ▁ ▂ ▄ ▂ ▅ ▂ ▅ ▄ ▂ ▁ ▄ ▅ ▇ ', 
                 status: 'sent',
               });
+              this.sendMessage();
               this.isRecording = false;
             }
         },

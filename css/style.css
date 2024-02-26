@@ -24,6 +24,11 @@ body{
 }
 
 
+#app {
+    border-radius: 60px !important; 
+}
+
+
 /* ******** SEZIONE SIDEBAR ******** */
 .sidebar{
     min-width: 400px;
