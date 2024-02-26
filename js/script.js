@@ -172,7 +172,7 @@ createApp({
                 }
             ]
         }
-    }, 
+    },
     methods: {
         // MILESTONE 2
         // funzione per far apparire la chat al click
@@ -184,7 +184,7 @@ createApp({
         sendMessage() {
             if (this.newMessage.trim() !== '') {
               const date = new Date();
-              const formattedDate = date.toLocaleTimeString();
+              const formattedDate = date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
               this.contacts[this.currentChat].messages.push({
                 date: formattedDate,
                 message: this.newMessage,
@@ -192,13 +192,17 @@ createApp({
               });
               this.newMessage = '';
         
-            //   far apparire il messaggio di risposta 1s dopo
+            //   la funzione setTimeOut viene lasciata dentro per evitare che arrivi una risposta anche se è stato premuto il tasto invio
+            //   essendoci la proprietà .trim evito che venga inserito testo vuoto, pertanto se ho inviato un campo vuoto --> non manda la risposta
+            
+                // far apparire il messaggio di risposta 1s dopo
               setTimeout(() => {
                 const replyDate = new Date();
-                const formattedReplyDate = replyDate.toLocaleTimeString();
+                // 2-digit formatta l'ora con due cifre
+                const formattedReplyDate = replyDate.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
                 this.contacts[this.currentChat].messages.push({
                   date: formattedReplyDate,
-                  message: 'basta scrivermi!!',
+                  message: 'ok',
                   status: 'received',
                 });
               }, 1000);
@@ -208,15 +212,10 @@ createApp({
         deleteMessage(index) {
             this.contacts[this.currentChat].messages.splice(index, 1);
             this.selectedMessageIndex = null;
-        },
-        showMenu(index) {
-            this.selectedMessageIndex = index;
-          },
-          hideMenu() {
-            this.selectedMessageIndex = null;
-        },
+        }
     },
     // funzione per filtrare le chat
+    // ho usato una proprietà calcolata così che venga riaggiornata solo quando cambia
     computed: {
         filteredContacts() {
           return this.contacts.filter(contact => 
@@ -225,4 +224,4 @@ createApp({
         },
     },
 }).mount("#app");
-// ******** VUE ********s
+// ******** VUE ********

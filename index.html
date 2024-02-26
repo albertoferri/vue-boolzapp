@@ -19,9 +19,9 @@
     <div id="app">
 
         <div class="container d-flex">
-            <div class="sidebar">
+            <div class="sidebar justify-content-around">
                 <div class="user-info">
-                    <div class="user-log">
+                    <div class="user-log user-select-none ">
                         <img src="img/avatar_2.jpg" alt="foto profilo">
                         <span>Alberto</span>
                     </div>
@@ -31,19 +31,20 @@
                         <i class="fa-solid fa-ellipsis-vertical"></i>
                     </div>
                 </div>
-                <div class="alert d-flex p-1 gap-2 rounded-0 mb-0">
+                <div class="alert d-flex p-1 gap-2 rounded-0 mb-0 align-items-center" >
                     <span class="d-flex justify-content-center align-items-center icon-box">
                         <i class="fa-solid fa-bell-slash p-1"></i>
                     </span>
-                    <div class="alertmessage">
+                    <div class="alertmessage" style="font-size: 14px;">
                         <span>Ricevi notifiche di nuovi messaggi</span><br>
                         <span>Attiva le notifiche desktop</span>
                     </div>
                 </div>
-                <div class="search-bar d-flex justify-content-center py-1">
-                    <input v-model="searchTerm" class="w-100 mx-2" type="text" placeholder="Cerca...">
+                <div class="input-group p-1">
+                    <span class="input-group-text" id="basic-addon1"><i class="fa-solid fa-magnifying-glass"></i></span>
+                    <input type="text" v-model="searchTerm"  class="form-control" placeholder="Cerca..." aria-label="Username" aria-describedby="basic-addon1">
                 </div>
-                <div class="chat-container d-flex flex-column gap-2">
+                <div class="chat-container d-flex flex-column gap-2 user-select-none ">
                     <div 
                         v-for="(contact, index) in filteredContacts" 
                         :key="index" 
@@ -56,15 +57,18 @@
                             <span>{{ contact.name }}</span><br>
                             <span class="last-message">{{ contact.messages[contact.messages.length - 1].message }}</span>
                         </div>
-                        <div class="last-message-time"><small>12:00</small></div>
+                        <div class="last-message-time"><small>{{ contact.messages[contact.messages.length - 1].date }}</small></div>
                     </div>
                 </div>
             </div>
+
+            <!-- SEZIONE CHAT -->
+            <!-- TOP -->
             <div class="main-container">
-                <div class="main-chat-info">
+                <div class="main-chat-info user-select-none ">
                     <div class="d-flex gap-2">
                         <img  class="user-pic align-middle rounded-5 " :src="contacts[currentChat].avatar"   alt="immagine ">
-                        <span class="user-name">{{ contacts[currentChat].name }}<br><small>utlimo accesso alle 12:00</small></span>
+                        <span class="user-name">{{ contacts[currentChat].name }}<br><small>ultimo accesso oggi alle 12:00</small></span>
                         
                     </div>
                     <div class="user-icon">
@@ -73,7 +77,8 @@
                         <i class="fa-solid fa-ellipsis-vertical"></i>
                     </div>
                 </div>
-                <div class="chat-box d-flex flex-column overflow-y-auto" v-if="currentChat !== null">
+                <!-- CHAT-BOX -->
+                <div class="chat-box d-flex flex-column overflow-y-auto" v-show="currentChat !== null">
                     <div 
                       v-for="(message, index) in contacts[currentChat].messages" 
                       :key="message.date" 
@@ -85,12 +90,13 @@
                         <span class="dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
                         </span>
                         <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                          <li><a class="dropdown-item" href="#" @click.prevent="deleteMessage(index)">Cancella</a></li>
+                          <li><a class="dropdown-item" href="#" @click="deleteMessage(index)">Cancella messaggio</a></li>
                         </ul>
                       </div>
                     </div>
                 </div>
-                  
+                
+                <!-- BARRA DI INPUT CHAT -->
                 <div id="message-bar" class="w-100 d-flex align-items-center ">
                     <button>
                         <i class="fa-regular fa-face-smile"></i>

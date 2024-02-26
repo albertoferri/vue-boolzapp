@@ -63,6 +63,11 @@ body{
 
 .alert{
     background-color: #8edafc;
+    height: 60px;
+}
+
+.input-group{
+    min-height: 46px;
 }
 
 .icon-box{
@@ -88,18 +93,20 @@ body{
 }
 
 .chat-container{
-    height: 450px;
+    height: calc(100% - 70px - 60px - 46px);
     padding: 20px;
 }
 
 .contact{
+    height: 40px;
     display: flex;
+
     position: relative;
 }
 
 .contact img{
-    width: 50px;
-    height: 50px;
+    width: 40px;
+    height: 40px;
     border-radius: 50%;
     margin-right: 10px;
     vertical-align: middle;
@@ -133,6 +140,17 @@ body{
     display: flex;
     flex-direction: column;
     position: relative;
+}
+
+.message .dropdown {
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility 0s, opacity 0.1s linear;
+}
+
+.message:hover .dropdown {
+    visibility: visible;
+    opacity: 1;
 }
 
 .message small{
