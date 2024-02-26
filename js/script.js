@@ -184,10 +184,10 @@ createApp({
         openChat(index) {
             this.currentChat = index;
         },
-        extractTimeFromDate(dateString) {
-            const date = new Date(dateString);
-            const hours = date.getHours().toString().padStart(2, '0'); // Aggiunge lo zero iniziale se necessario
-            const minutes = date.getMinutes().toString().padStart(2, '0'); // Aggiunge lo zero iniziale se necessario
+        extractTime(dato) {
+            const date = new Date(dato);
+            const hours = date.getHours().toString().padStart(2, '0'); 
+            const minutes = date.getMinutes().toString().padStart(2, '0'); 
             return `${hours}:${minutes}`;
         },
         // MILESTONE 3
@@ -212,16 +212,25 @@ createApp({
               const replyDate = new Date();
               const formattedReplyDate = replyDate.toLocaleTimeString();
             
-              // Array di tre tipi di messaggi possibili
-              const messageArray = ['basta scrivermi!!', 'Ciao! Come posso aiutarti?', 'Grazie per il messaggio!'];
+            //   non visualizza il messaggio alternativo
+            //   if (this.isRecording) {
+            //     replyMessage = 'ciao';
+            //   } else{
+            //     replyMessage = 'ok'
+            //   }
+
+
+            //   // Array di tre tipi di messaggi possibili
+            //   const messageArray = ['basta scrivermi!!', 'Ciao! Come posso aiutarti?', 'Grazie per il messaggio!'];
         
-              // Generazione casuale di un numero tra 0 e 2 per selezionare un tipo di messaggio
-              const randomIndex = Math.floor(Math.random() * 3);
+            //   // Generazione casuale di un numero tra 0 e 2 per selezionare un tipo di messaggio
+            //   const randomIndex = Math.floor(Math.random() * 3);
         
               // Aggiunta del messaggio casuale all'array di messaggi del contatto corrente
               this.contacts[this.currentChat].messages.push({
                 date: formattedReplyDate,
-                message: messageArray[randomIndex], // Selezione casuale del tipo di messaggio
+                // message: replyMessage,
+                message: messageArray[randomIndex], 
                 status: 'received',
               });
             }, 1000);
@@ -261,10 +270,11 @@ createApp({
           );
         }
     },
+    // estrarre l'ora e minuti
     created() {
         this.contacts.forEach(contact => {
           contact.messages.forEach(message => {
-            message.timeOnly = this.extractTimeFromDate(message.date);
+            message.timeOnly = this.extractTime(message.date);
           });
         });
     }
