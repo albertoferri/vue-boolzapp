@@ -178,6 +178,7 @@ createApp({
             ]
         }
     },
+    
     methods: {
         // MILESTONE 2
         // funzione per far apparire la chat al click
@@ -185,24 +186,10 @@ createApp({
             this.currentChat = index;
         },
 
-        // Funzione che strasforma una stringa in un oggetto date
-        parseDate(dato) {
-            // divide la stringa e inserisce / e : tra i dati
-            const [day, month, year, hour, minute, second] = dato.split(/[\s/:-]/);
-            // L'oggetto Date inizia il mese da 0, quindi sottraiamo 1 dal mese
-            return new Date(year, month - 1, day, hour, minute, second);
-        },
-        formattedDate(dato) {
-            const date = this.parseDate(dato);
-            // Formattazione della data in formato americano
-            const options = { year: 'numeric', month: 'numeric', day: 'numeric', hour: '2-digit', minute: '2-digit' };
-            return date.toLocaledato('en-US', options);
-        },
-        // prendo solo ora e minuti
-        formattedTime(dato) {
-            const date = this.parseDate(dato);
-            const hours = date.getHours().toString().padStart(2, '0');
-            const minutes = date.getMinutes().toString().padStart(2, '0');
+        extractTime(dato) {
+            const date = new Date(dato);
+            const hours = date.getHours().toString().padStart(2, '0'); 
+            const minutes = date.getMinutes().toString().padStart(2, '0'); 
             return `${hours}:${minutes}`;
         },
           
@@ -269,5 +256,12 @@ createApp({
           );
         }
     },
+    created() {
+        this.contacts.forEach(contact => {
+          contact.messages.forEach(message => {
+            message.timeOnly = this.extractTime(message.date);
+          });
+        });
+    }
 }).mount("#app");
 // ******** VUE ********

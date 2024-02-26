@@ -62,7 +62,7 @@
                             <span>{{ contact.name }}</span><br>
                             <span class="last-message">{{ contact.messages[contact.messages.length - 1].message }}</span>
                         </div>
-                        <div class="last-message-time"><small>{{ formattedTime(contact.messages[contact.messages.length - 1].date) }}</small></div>
+                        <div class="last-message-time"><small>{{ extractTime(contact.messages[contact.messages.length - 1].date) }}</small></div>
                     </div>
                 </div>
             </div>
@@ -90,7 +90,7 @@
                       :class="`message ${message.status}`"
                     >
                       <p class="mb-0" style="word-wrap: break-word;">{{ message.message }}</p>
-                      <small style="font-size: 12px;">{{ formattedTime(message.date) }}</small>
+                      <small style="font-size: 12px;">{{ extractTime(message.date) }}</small>
                       <div class="dropdown message">
                         <span class="dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
                         </span>
