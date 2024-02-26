@@ -4,9 +4,14 @@ createApp({
     data() {
         return {
             // VARIABILI
+            // variabile per filtrare i contatti
             searchTerm: '',
+            // inizializzare il messaggio vuoto
             newMessage: '',
+            // x visualizzare la chat al click
             currentChat: 0,
+            // x mandare vocali
+            isRecording: false,
             
             contacts: [
                 {
@@ -194,7 +199,7 @@ createApp({
         
             //   la funzione setTimeOut viene lasciata dentro per evitare che arrivi una risposta anche se è stato premuto il tasto invio
             //   essendoci la proprietà .trim evito che venga inserito testo vuoto, pertanto se ho inviato un campo vuoto --> non manda la risposta
-            
+
                 // far apparire il messaggio di risposta 1s dopo
               setTimeout(() => {
                 const replyDate = new Date();
@@ -212,7 +217,24 @@ createApp({
         deleteMessage(index) {
             this.contacts[this.currentChat].messages.splice(index, 1);
             this.selectedMessageIndex = null;
-        }
+        },
+        // FUNZIONE PER MANDARE UN VOCALE "COME SULL'APP ORIGINALE"
+        startRecording(){
+            this.isRecording = true;
+        },
+        // ho usato la stessa funzione per mandare i messaggi ma legata alla pressione del tasto del microfono
+        sendVoiceMessage() {
+            if (this.isRecording) {
+              const date = new Date();
+              const formattedDate = date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+              this.contacts[this.currentChat].messages.push({
+                date: formattedDate,
+                message: ' ▁ ▂ ▄ ▂ ▅ ▂ ▅ ▄ ▂ ▁ ▄ ▅ ▇ ', // Simula un messaggio vocale con linee di altezza diversa
+                status: 'sent',
+              });
+              this.isRecording = false;
+            }
+        },
     },
     // funzione per filtrare le chat
     // ho usato una proprietà calcolata così che venga riaggiornata solo quando cambia
@@ -221,7 +243,7 @@ createApp({
           return this.contacts.filter(contact => 
             contact.name.toLowerCase().includes(this.searchTerm.toLowerCase())
           );
-        },
-    },
+        }
+    }
 }).mount("#app");
 // ******** VUE ********

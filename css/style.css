@@ -3,6 +3,8 @@
     margin: 0;
     box-sizing: border-box;
 }
+/* ******** RESET ******** */
+
 
 body{
     font-family: sans-serif;
@@ -11,12 +13,18 @@ body{
     overflow-y: hidden;
 }
 
+.fa-solid{
+    cursor: pointer;
+}
+
 .container{
     width: 1100px;
     height: 650px;
     margin-top: 100px;
 }
 
+
+/* ******** SEZIONE SIDEBAR ******** */
 .sidebar{
     min-width: 400px;
     background-color: white;
@@ -32,11 +40,7 @@ body{
     width: 100%;
 }
 
-.user-log span{
-    font-size: 22px;
-    font-weight: bold;
-}
-
+/* **** USER LOG **** */
 .user-log img {
     vertical-align: middle;
     width: 50px;
@@ -45,6 +49,13 @@ body{
     margin-right: 10px;
 }
 
+.user-log span{
+    font-size: 22px;
+    font-weight: bold;
+}
+
+
+/* **** USER ICON **** */
 .user-icon{
     display: flex;
     justify-content: space-between;
@@ -52,22 +63,12 @@ body{
     opacity: .5;
 }
 
-.main-container{
-    width: 700px;
-    height: 650px;
-    background-image: url(/img/mine.jpg);
 
-    display: flex;
-    flex-direction: column;
-}
-
+/* **** ALERT **** */
 .alert{
     background-color: #8edafc;
     height: 60px;
-}
-
-.input-group{
-    min-height: 46px;
+    padding: 10px!important;
 }
 
 .icon-box{
@@ -82,24 +83,29 @@ body{
     color: #8edafc;
 }
 
-.fa-solid{
-    cursor: pointer;
-}
-
 .alertmessage span:last-child{
     text-decoration: underline;
     opacity: .5;
     margin: 10px 0;
 }
 
+
+/* **** SEARCH BAR **** */
+.input-group{
+    min-height: 46px;
+    padding: 10px!important;
+}
+
+/* **** CHAT CONTAINER **** */
 .chat-container{
     height: calc(100% - 70px - 60px - 46px);
-    padding: 20px;
+    padding: 10px 10px 20px;
 }
 
 .contact{
-    height: 40px;
+    height: 50px;
     display: flex;
+    padding: 5px 0;
 
     position: relative;
 }
@@ -112,23 +118,49 @@ body{
     vertical-align: middle;
 }
 
-.user-pic{
-    width: 50px;
-    height: auto;
+.last-message{
+    font-size: 12px;
 }
 
+.last-message-time{
+    position: absolute;
+    top: 5px;
+    right: 10px;
+}
+
+
+/* ******** SEZIONE MAIN ******** */
+.main-container{
+    width: 700px;
+    height: 650px;
+    background-image: url(/img/mine.jpg);
+
+    display: flex;
+    flex-direction: column;
+}
+
+
+/* **** MAIN TOP BAR **** */
 .chat-info span:first-child{
     font-size: 22px;
     font-weight: bold;
+}
+
+.user-pic{
+    width: 50px;
+    height: auto;
 }
 
 .chat-info span:last-child{
     opacity: .5;
 }
 
+
+/* **** MAIN CHAT BOX **** */
 .chat-box{
     height: 530px;
     padding: 20px;
+    overflow-x: hidden;
 }
 
 .message {
@@ -136,10 +168,31 @@ body{
     margin-bottom: 10px;
     padding: 10px;
     border-radius: 10px;
-
-    display: flex;
-    flex-direction: column;
     position: relative;
+}
+
+.message small{
+    align-self: flex-end;
+}
+
+
+/* **** MESSAGE STYLES **** */
+.message.received{
+    background-color: white;
+    align-self: flex-start;
+}
+
+.message.sent{
+    background-color: #d4fabb;
+    align-self: flex-end;
+}
+
+
+/* **** BONUS DROPDOWN **** */
+.dropdown{
+    position: absolute;
+    top: 0;
+    right: 5px;
 }
 
 .message .dropdown {
@@ -153,30 +206,8 @@ body{
     opacity: 1;
 }
 
-.message small{
-    align-self: flex-end;
-}
 
-.message.received{
-    background-color: white;
-    align-self: flex-start;
-}
-
-.message.sent{
-    background-color: #d4fabb;
-    align-self: flex-end;
-}
-
-.last-message{
-    font-size: 12px;
-}
-
-.last-message-time{
-    position: absolute;
-    top: 5px;
-    right: 10px;
-}
-
+/* **** BOTTOM BAR **** */
 #message-bar{
     background-color: #f3eeea;
     height: 50px;
@@ -204,9 +235,8 @@ body{
     height: 40px;
 }
 
-
-.dropdown{
-    position: absolute;
-    top: 0;
-    right: 5px;
+#message-bar .fa-microphone:active{
+    color: red;
+    opacity: .7;
+    transition: .3s ease-in-out;
 }

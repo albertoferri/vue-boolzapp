@@ -19,7 +19,9 @@
     <div id="app">
 
         <div class="container d-flex">
-            <div class="sidebar justify-content-around">
+
+            <!-- SIDEBAR -->
+            <div class="sidebar d-flex flex-column justify-content-around">
                 <div class="user-info">
                     <div class="user-log user-select-none ">
                         <img src="img/avatar_2.jpg" alt="foto profilo">
@@ -31,8 +33,9 @@
                         <i class="fa-solid fa-ellipsis-vertical"></i>
                     </div>
                 </div>
-                <div class="alert d-flex p-1 gap-2 rounded-0 mb-0 align-items-center" >
-                    <span class="d-flex justify-content-center align-items-center icon-box">
+                <!-- ALERT -->
+                <div class="alert d-flex gap-2 rounded-0 mb-0 align-items-center" >
+                    <span class="icon-box d-flex justify-content-center align-items-center">
                         <i class="fa-solid fa-bell-slash p-1"></i>
                     </span>
                     <div class="alertmessage" style="font-size: 14px;">
@@ -40,11 +43,13 @@
                         <span>Attiva le notifiche desktop</span>
                     </div>
                 </div>
-                <div class="input-group p-1">
+                <!-- INPUT RICERCA -->
+                <div class="input-group">
                     <span class="input-group-text" id="basic-addon1"><i class="fa-solid fa-magnifying-glass"></i></span>
                     <input type="text" v-model="searchTerm"  class="form-control" placeholder="Cerca..." aria-label="Username" aria-describedby="basic-addon1">
                 </div>
-                <div class="chat-container d-flex flex-column gap-2 user-select-none ">
+                <!-- LISTA CONTATTI E CHAT RECENTI -->
+                <div class="chat-container d-flex flex-column gap-1 user-select-none overflow-y-auto overflow-x-hidden">
                     <div 
                         v-for="(contact, index) in filteredContacts" 
                         :key="index" 
@@ -84,7 +89,7 @@
                       :key="message.date" 
                       :class="`message ${message.status}`"
                     >
-                      <p class="mb-0">{{ message.message }}</p>
+                      <p class="mb-0" style="word-wrap: break-word;">{{ message.message }}</p>
                       <small style="font-size: 12px;">{{ message.date }}</small>
                       <div class="dropdown">
                         <span class="dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
@@ -105,7 +110,7 @@
                     <input type="text" v-model="newMessage" @keyup.enter="sendMessage" placeholder="Scrivi messaggio" >
 
                     <button>
-                        <i class="fa-solid fa-microphone"></i>
+                        <i @mousedown="startRecording" @mouseup="sendVoiceMessage" class="fa-solid fa-microphone"></i>
                     </button>
                 </div>  
                 
