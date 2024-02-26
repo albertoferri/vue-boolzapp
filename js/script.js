@@ -211,10 +211,18 @@ createApp({
               setTimeout(() => {
                 const replyDate = new Date();
                 const formattedReplyDate = replyDate.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-                console.log(formattedReplyDate)
-                const messageArray = ['basta scrivermi!!', 'Ciao! mi fa piacere!', 'Scusa non posso parlare ora, ti scrivo dopo!'];
+                const messageArray = ['basta scrivermi!!', 'Ciao! mi fa piacere!', 
+                                        'Scusa non posso parlare ora, ti scrivo dopo!', 
+                                        'Posso aiutarti?', 
+                                        'Sto arrivando!', 
+                                        'Non preoccuparti, risolveremo tutto.', 
+                                        'È stato un piacere aiutarti!', 
+                                        'Mi dispiace, non posso aiutarti in questo momento.',
+                                        'Non vedo l\'ora di parlare con te!', 
+                                        'Grazie per avermi scritto.'
+                                    ];
           
-                const randomIndex = Math.floor(Math.random() * 3);
+                const randomIndex = Math.floor(Math.random() * 10);
           
                 this.contacts[this.currentChat].messages.push({
                   date: replyDate,
@@ -268,6 +276,7 @@ createApp({
             const lastMessageB = b.messages[b.messages.length - 1].date;
             return new Date(lastMessageB) - new Date(lastMessageA);
           });
+          
         }
     },
     created() {
