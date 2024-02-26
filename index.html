@@ -62,7 +62,7 @@
                             <span>{{ contact.name }}</span><br>
                             <span class="last-message">{{ contact.messages[contact.messages.length - 1].message }}</span>
                         </div>
-                        <div class="last-message-time"><small>{{ contact.messages[contact.messages.length - 1].timeOnly }}</small></div>
+                        <div class="last-message-time"><small>{{ formattedTime(contact.messages[contact.messages.length - 1].date) }}</small></div>
                     </div>
                 </div>
             </div>
@@ -90,7 +90,7 @@
                       :class="`message ${message.status}`"
                     >
                       <p class="mb-0" style="word-wrap: break-word;">{{ message.message }}</p>
-                      <small style="font-size: 12px;">{{ message.timeOnly }}</small>
+                      <small style="font-size: 12px;">{{ formattedTime(message.date) }}</small>
                       <div class="dropdown message">
                         <span class="dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
                         </span>
@@ -112,7 +112,7 @@
                         </ul>
                       </div>
 
-                    <input type="text" v-model="newMessage" @keyup.enter="sendMessage" placeholder="Scrivi messaggio" >
+                    <input type="text" v-model="newMessage" @keyup.enter="sendMessage()" placeholder="Scrivi messaggio" >
 
                     <button>
                         <i v-if="newMessage === ''" @mousedown="startRecording" @mouseup="sendVoiceMessage" class="fa-solid fa-microphone"></i>

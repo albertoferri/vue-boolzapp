@@ -184,12 +184,27 @@ createApp({
         openChat(index) {
             this.currentChat = index;
         },
-        extractTime(dato) {
-            const date = new Date(dato);
-            const hours = date.getHours().toString().padStart(2, '0'); 
-            const minutes = date.getMinutes().toString().padStart(2, '0'); 
+
+        // Funzione che strasforma una stringa in un oggetto date
+        parseDate(dato) {
+            // divide la stringa e inserisce / e : tra i dati
+            const [day, month, year, hour, minute, second] = dato.split(/[\s/:-]/);
+            // L'oggetto Date inizia il mese da 0, quindi sottraiamo 1 dal mese
+            return new Date(year, month - 1, day, hour, minute, second);
+        },
+        formattedDate(dato) {
+            const date = this.parseDate(dato);
+            // Formattazione della data in formato americano
+            const options = { year: 'numeric', month: 'numeric', day: 'numeric', hour: '2-digit', minute: '2-digit' };
+            return date.toLocaledato('en-US', options);
+        },
+        formattedTime(dato) {
+            const date = this.parseDate(dato);
+            const hours = date.getHours().toString().padStart(2, '0');
+            const minutes = date.getMinutes().toString().padStart(2, '0');
             return `${hours}:${minutes}`;
         },
+          
         // MILESTONE 3
         // funzione per pushare un messaggio dentro l'array
         sendMessage() {
@@ -197,46 +212,29 @@ createApp({
               const date = new Date();
               const formattedDate = date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
               this.contacts[this.currentChat].messages.push({
-                date: formattedDate,
+                date: date,
                 message: this.newMessage,
                 status: 'sent',
               });
               this.newMessage = '';
-        
-             // la funzione setTimeOut viene lasciata dentro per evitare che arrivi una risposta anche se è stato premuto il tasto invio
-             // essendoci la proprietà .trim evito che venga inserito testo vuoto, pertanto se ho inviato un campo vuoto --> non manda la risposta
-
-             // far apparire il messaggio di risposta 1s dopo
-             // 2-digit formatta l'ora con due cifre
-             setTimeout(() => {
-              const replyDate = new Date();
-              const formattedReplyDate = replyDate.toLocaleTimeString();
             
-            //   non visualizza il messaggio alternativo
-            //   if (this.isRecording) {
-            //     replyMessage = 'ciao';
-            //   } else{
-            //     replyMessage = 'ok'
-            //   }
-
-
-            //   // Array di tre tipi di messaggi possibili
-            //   const messageArray = ['basta scrivermi!!', 'Ciao! Come posso aiutarti?', 'Grazie per il messaggio!'];
-        
-            //   // Generazione casuale di un numero tra 0 e 2 per selezionare un tipo di messaggio
-            //   const randomIndex = Math.floor(Math.random() * 3);
-        
-              // Aggiunta del messaggio casuale all'array di messaggi del contatto corrente
-              this.contacts[this.currentChat].messages.push({
-                date: formattedReplyDate,
-                // message: replyMessage,
-                message: messageArray[randomIndex], 
-                status: 'received',
-              });
-            }, 1000);
-            
+              setTimeout(() => {
+                const replyDate = new Date();
+                const formattedReplyDate = replyDate.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+                console.log(formattedReplyDate)
+                const messageArray = ['basta scrivermi!!', 'Ciao! mi fa piacere!', 'Scusa non posso parlare ora, ti scrivo dopo!'];
+          
+                const randomIndex = Math.floor(Math.random() * 3);
+          
+                this.contacts[this.currentChat].messages.push({
+                  date: replyDate,
+                  message: messageArray[randomIndex], 
+                  status: 'received',
+                });
+              }, 1000);
             }
         },
+          
         // bonus
         deleteMessage(index) {
             this.contacts[this.currentChat].messages.splice(index, 1);
@@ -270,13 +268,5 @@ createApp({
           );
         }
     },
-    // estrarre l'ora e minuti
-    created() {
-        this.contacts.forEach(contact => {
-          contact.messages.forEach(message => {
-            message.timeOnly = this.extractTime(message.date);
-          });
-        });
-    }
 }).mount("#app");
 // ******** VUE ********
