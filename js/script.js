@@ -184,6 +184,12 @@ createApp({
         openChat(index) {
             this.currentChat = index;
         },
+        extractTimeFromDate(dateString) {
+            const date = new Date(dateString);
+            const hours = date.getHours().toString().padStart(2, '0'); // Aggiunge lo zero iniziale se necessario
+            const minutes = date.getMinutes().toString().padStart(2, '0'); // Aggiunge lo zero iniziale se necessario
+            return `${hours}:${minutes}`;
+        },
         // MILESTONE 3
         // funzione per pushare un messaggio dentro l'array
         sendMessage() {
@@ -204,19 +210,22 @@ createApp({
              // 2-digit formatta l'ora con due cifre
              setTimeout(() => {
               const replyDate = new Date();
-              const formattedReplyDate = replyDate.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-              // Se il messaggio inviato è un messaggio vocale, cambia il messaggio di risposta
-              if (this.isRecording) {
-                replyMessage = 'ciao';
-              } else{
-                replyMessage = 'ok'
-              }
+              const formattedReplyDate = replyDate.toLocaleTimeString();
+            
+              // Array di tre tipi di messaggi possibili
+              const messageArray = ['basta scrivermi!!', 'Ciao! Come posso aiutarti?', 'Grazie per il messaggio!'];
+        
+              // Generazione casuale di un numero tra 0 e 2 per selezionare un tipo di messaggio
+              const randomIndex = Math.floor(Math.random() * 3);
+        
+              // Aggiunta del messaggio casuale all'array di messaggi del contatto corrente
               this.contacts[this.currentChat].messages.push({
                 date: formattedReplyDate,
-                message: replyMessage,
+                message: messageArray[randomIndex], // Selezione casuale del tipo di messaggio
                 status: 'received',
               });
-             }, 1000);
+            }, 1000);
+            
             }
         },
         // bonus
@@ -251,6 +260,13 @@ createApp({
             contact.name.toLowerCase().includes(this.searchTerm.toLowerCase())
           );
         }
+    },
+    created() {
+        this.contacts.forEach(contact => {
+          contact.messages.forEach(message => {
+            message.timeOnly = this.extractTimeFromDate(message.date);
+          });
+        });
     }
 }).mount("#app");
 // ******** VUE ********

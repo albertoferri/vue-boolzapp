@@ -62,7 +62,7 @@
                             <span>{{ contact.name }}</span><br>
                             <span class="last-message">{{ contact.messages[contact.messages.length - 1].message }}</span>
                         </div>
-                        <div class="last-message-time"><small>{{ contact.messages[contact.messages.length - 1].date }}</small></div>
+                        <div class="last-message-time"><small>{{ contact.messages[contact.messages.length - 1].timeOnly }}</small></div>
                     </div>
                 </div>
             </div>
@@ -90,8 +90,8 @@
                       :class="`message ${message.status}`"
                     >
                       <p class="mb-0" style="word-wrap: break-word;">{{ message.message }}</p>
-                      <small style="font-size: 12px;">{{ message.date }}</small>
-                      <div class="dropdown">
+                      <small style="font-size: 12px;">{{ message.timeOnly }}</small>
+                      <div class="dropdown message">
                         <span class="dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
                         </span>
                         <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
@@ -103,14 +103,20 @@
                 
                 <!-- BARRA DI INPUT CHAT -->
                 <div id="message-bar" class="w-100 d-flex align-items-center ">
-                    <button>
-                        <i class="fa-regular fa-face-smile"></i>
-                    </button>
+                    <div class="dropdown">
+                        <i role="button" class="fa-regular fa-face-smile" id="dropdownMenuButton" data-bs-toggle="dropdown"></i>
+                        <ul class="dropdown-menu " aria-labelledby="dropdownMenuButton">
+                          <li><a class="dropdown-item" href="#"><i class="fa-regular fa-face-surprise"></i></a></li>
+                          <li><a class="dropdown-item" href="#"><i class="fa-regular fa-face-grin-stars"></i></a></li>
+                          <li><a class="dropdown-item" href="#"><i class="fa-regular fa-face-angry"></i></a></li>
+                        </ul>
+                      </div>
 
                     <input type="text" v-model="newMessage" @keyup.enter="sendMessage" placeholder="Scrivi messaggio" >
 
                     <button>
-                        <i @mousedown="startRecording" @mouseup="sendVoiceMessage" class="fa-solid fa-microphone"></i>
+                        <i v-if="newMessage === ''" @mousedown="startRecording" @mouseup="sendVoiceMessage" class="fa-solid fa-microphone"></i>
+                        <i v-else @click="sendMessage" class="fa-solid fa-paper-plane"></i>
                     </button>
                 </div>  
                 
