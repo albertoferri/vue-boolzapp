@@ -12,6 +12,8 @@ createApp({
             currentChat: 0,
             // x mandare vocali
             isRecording: false,
+            // bonus splashpage
+            showSplashPage: true,
             
             contacts: [
                 {
@@ -273,7 +275,10 @@ createApp({
           contact.messages.forEach(message => {
             message.timeOnly = this.extractTime(message.date);
           });
-        });
+        }),
+        setTimeout(() => {
+            this.showSplashPage = false; 
+        }, 1000);
     }
 }).mount("#app");
 // ******** VUE ********
