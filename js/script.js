@@ -198,6 +198,7 @@ createApp({
             const options = { year: 'numeric', month: 'numeric', day: 'numeric', hour: '2-digit', minute: '2-digit' };
             return date.toLocaledato('en-US', options);
         },
+        // prendo solo ora e minuti
         formattedTime(dato) {
             const date = this.parseDate(dato);
             const hours = date.getHours().toString().padStart(2, '0');
