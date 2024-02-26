@@ -221,6 +221,27 @@ body{
     opacity: 1;
 }
 
+/* **** EMOJI ***** */
+.dropdown-menu {
+    top: 100%;
+    left: 0;
+    display: none;
+    flex-direction: row;
+    flex-wrap: wrap;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    padding: 5px;
+}
+
+.dropdown-menu.show {
+    display: flex;
+    justify-content: space-around;
+}
+
+.emoji {
+    cursor: pointer;
+    margin: 5px;
+}
 
 /* **** BOTTOM BAR **** */
 #message-bar{

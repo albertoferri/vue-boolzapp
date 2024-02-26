@@ -252,10 +252,18 @@ createApp({
     // funzione per filtrare le chat
     // ho usato una proprietà calcolata così che venga riaggiornata solo quando cambia
     computed: {
-        filteredContacts() {
-          return this.contacts.filter(contact => 
+        filteredAndSortedContacts() {
+          // Filtra i contatti in base al termine di ricerca
+          const filteredContacts = this.contacts.filter(contact =>
             contact.name.toLowerCase().includes(this.searchTerm.toLowerCase())
           );
+          
+          // Ordina i contatti filtrati in base all'ultimo messaggio
+          return filteredContacts.slice().sort((a, b) => {
+            const lastMessageA = a.messages[a.messages.length - 1].date;
+            const lastMessageB = b.messages[b.messages.length - 1].date;
+            return new Date(lastMessageB) - new Date(lastMessageA);
+          });
         }
     },
     created() {

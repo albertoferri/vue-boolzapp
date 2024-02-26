@@ -51,7 +51,7 @@
                 <!-- LISTA CONTATTI E CHAT RECENTI -->
                 <div class="chat-container d-flex flex-column gap-1 user-select-none overflow-y-auto overflow-x-hidden">
                     <div 
-                        v-for="(contact, index) in filteredContacts" 
+                        v-for="(contact, index) in filteredAndSortedContacts" 
                         :key="index" 
                         class="contact" 
                         role="button" 
@@ -105,15 +105,28 @@
                 <div id="message-bar" class="w-100 d-flex align-items-center ">
                     <div class="dropdown">
                         <i role="button" class="fa-regular fa-face-smile d-flex align-items-center" id="dropdownMenuButton" data-bs-toggle="dropdown"></i>
-                        <ul class="dropdown-menu " aria-labelledby="dropdownMenuButton">
-                          <li><a class="dropdown-item" href="#"><i class="fa-regular fa-face-surprise"></i></a></li>
-                          <li><a class="dropdown-item" href="#"><i class="fa-regular fa-face-grin-stars"></i></a></li>
-                          <li><a class="dropdown-item" href="#"><i class="fa-regular fa-face-angry"></i></a></li>
-                        </ul>
-                      </div>
-
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                          <div class="emoji">😀</div>
+                          <div class="emoji">😂</div>
+                          <div class="emoji">😊</div>
+                          <div class="emoji">😍</div>
+                          <div class="emoji">🥰</div>
+                          <div class="emoji">😎</div>
+                          <div class="emoji">😇</div>
+                          <div class="emoji">😋</div>
+                          <div class="emoji">😷</div>
+                          <div class="emoji">🤯</div>
+                          <div class="emoji">🥳</div>
+                          <div class="emoji">😴</div>
+                          <div class="emoji">😛</div>
+                          <div class="emoji">🤠</div>
+                          <div class="emoji">👻</div>
+                          <div class="emoji">🤖</div>
+                        </div>
+                    </div>
+                      
                     <input type="text" v-model="newMessage" @keyup.enter="sendMessage()" placeholder="Scrivi messaggio" >
-
+                    
                     <button>
                         <i v-if="newMessage === ''" @mousedown="startRecording" @mouseup="sendVoiceMessage" class="fa-solid fa-microphone"></i>
                         <i v-else @click="sendMessage" class="fa-solid fa-paper-plane"></i>
