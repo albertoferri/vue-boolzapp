@@ -263,20 +263,25 @@ createApp({
     // ho usato una proprietà calcolata così che venga riaggiornata solo quando cambia
     computed: {
         // modificata funzione per sortare le chat seguendo la l'ora dell'ultimo messaggio
-        filteredAndSortedContacts() {
-          // Filtra i contatti nella search bar
-          const filteredContacts = this.contacts.filter(contact =>
-            contact.name.toLowerCase().includes(this.searchTerm.toLowerCase())
-          );
+        // filteredAndSortedContacts() {
+        //   Filtra i contatti nella search bar
+        //   const filteredContacts = this.contacts.filter(contact =>
+        //     contact.name.toLowerCase().includes(this.searchTerm.toLowerCase())
+        //   );
           
-          // Ordina i contatti filtrati in base all'ultimo messaggio
-          // tramite una funzione di confronto
-          return filteredContacts.slice().sort((a, b) => {
-            const lastMessageA = a.messages[a.messages.length - 1].date;
-            const lastMessageB = b.messages[b.messages.length - 1].date;
-            return new Date(lastMessageB) - new Date(lastMessageA);
-          });
+        //   Ordina i contatti filtrati in base all'ultimo messaggio
+        //   tramite una funzione di confronto
+        //   return filteredContacts.slice().sort((a, b) => {
+        //     const lastMessageA = a.messages[a.messages.length - 1].date;
+        //     const lastMessageB = b.messages[b.messages.length - 1].date;
+        //     return new Date(lastMessageB) - new Date(lastMessageA);
+        //   });
           
+        // }
+        filteredContacts() {
+            return this.contacts.filter(contact => 
+              contact.name.toLowerCase().includes(this.searchTerm.toLowerCase())
+            );
         }
     },
     created() {
